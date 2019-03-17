@@ -1,0 +1,82 @@
+---
+# Based on the AirBnb JavaScript styleguides with our own twist
+env:
+  es6: true
+  node: true
+  mocha: true
+extends:
+  - eslint:recommended
+  - plugin:lodash/recommended
+  - plugin:promise/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
+parser: babel-eslint
+parserOptions:
+  ecmaVersion: 8
+  sourceType: module
+  ecmaFeatures:
+    classes: true
+    impliedStrict: true
+    modules: true
+plugins:
+  - promise
+  - lodash
+  - import
+  - jsdoc
+rules:
+  indent: [ error, tab, {
+    MemberExpression: off
+  } ]
+  linebreak-style: [ error, unix ]
+  semi: [ error, always ]
+  quotes: [ error, double, { avoidEscape: true } ]
+  no-mixed-spaces-and-tabs: error
+  space-before-blocks: error
+  keyword-spacing: [ error, { before: true } ]
+  arrow-spacing: error
+  key-spacing: [ error, { afterColon: true, mode: minimum } ]
+  brace-style: [ error, stroustrup ]
+  comma-spacing: [ error, { before: false, after: true } ]
+  comma-style: [ error, last, { exceptions: { VariableDeclaration: true } } ]
+  array-bracket-spacing: off # [ error, always, { singleValue: false } ]
+  computed-property-spacing: [ error, never ]
+  object-curly-spacing: [ error, always ]
+  prefer-const: error
+  no-var: error
+  no-unused-vars: [ error, { vars: all, args: none, ignoreRestSiblings: true } ]
+  #
+  # JSDoc configuration
+  #
+  valid-jsdoc: off
+  jsdoc/check-param-names: warn
+  jsdoc/check-tag-names: warn
+  jsdoc/check-types: warn
+  jsdoc/require-param: off
+  jsdoc/require-hyphen-before-param-description: warn
+  jsdoc/require-param-description: warn
+  jsdoc/require-param-type: off # we use Flow types instead
+  jsdoc/require-returns-type: off # we use Flow types instead
+  jsdoc/require-returns-description: off # often not necessary
+  #
+  # Promises
+  #
+  promise/no-nesting: off
+  promise/no-return-in-finally: off
+  promise/no-native: error
+  promise/valid-params: off   # Does not work with bluebird typed catch
+  #
+  # Imports
+  #
+  import/first: error
+  import/newline-after-import: error
+  import/no-named-as-default: off
+  import/no-extraneous-dependencies: [ error, { devDependencies: true } ]
+  #
+  # Lodash
+  #
+  lodash/import-scope: off
+  lodash/preferred-alias: off
+  lodash/prop-shorthand: off
+  lodash/prefer-constant: off
+  lodash/prefer-lodash-method: [ error, { ignoreObjects: [ bb ] } ]
+  lodash/path-style: [ warn, as-needed ]

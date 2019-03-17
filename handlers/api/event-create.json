@@ -1,0 +1,43 @@
+{
+    "resource": "/api/{any+}",
+    "path": "/api/factoids/viserra",
+    "httpMethod": "POST",
+    "headers": null,
+    "multiValueHeaders": null,
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": {
+        "any": "factoids/viserra"
+    },
+    "stageVariables": null,
+    "requestContext": {
+        "path": "/api/{any+}",
+        "accountId": "108384265062",
+        "resourceId": "r5sgtb",
+        "stage": "test-invoke-stage",
+        "domainPrefix": "testPrefix",
+        "requestId": "14005c97-48d6-11e9-b60a-6142e51e2e6a",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "cognitoIdentityId": null,
+            "apiKey": "test-invoke-api-key",
+            "cognitoAuthenticationType": null,
+            "userArn": "arn:aws:iam::108384265062:root",
+            "apiKeyId": "test-invoke-api-key-id",
+            "userAgent": "aws-internal/3 aws-sdk-java/1.11.498 Linux/4.9.137-0.1.ac.218.74.329.metal1.x86_64 OpenJDK_64-Bit_Server_VM/25.202-b08 java/1.8.0_202",
+            "accountId": "108384265062",
+            "caller": "108384265062",
+            "sourceIp": "test-invoke-source-ip",
+            "accessKey": "ASIARSPBUUNTNSOQMJH2",
+            "cognitoAuthenticationProvider": null,
+            "user": "108384265062"
+        },
+        "domainName": "testPrefix.testDomainName",
+        "resourcePath": "/api/{any+}",
+        "httpMethod": "POST",
+        "extendedRequestId": "Wsh5DFf5oAMFtSQ=",
+        "apiId": "pwoxg9wupd"
+    },
+    "body": "{\r\n  \"image\": \"URL\"\r\n}",
+    "isBase64Encoded": false
+}

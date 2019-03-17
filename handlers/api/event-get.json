@@ -1,0 +1,22 @@
+{
+    "resource":"/api/{any+}",
+    "path":"/api/factoids/viserra/1",
+    "httpMethod":"GET",
+    "headers":null,
+    "multiValueHeaders":null,
+    "queryStringParameters":null,
+    "multiValueQueryStringParameters":null,
+    "pathParameters": {
+        "any":"factoids/viserra/1"
+        
+    },
+    "stageVariables":null,
+    "requestContext": {
+        "path":"/api/{any+}", 
+        "accountId":"108384265062",
+        "resourceId":"r5sgtb",
+        "stage":"test-invoke-stage",
+        "domainPrefix":"testPrefix",
+        "requestId":"47b95c6a-48c8-11e9-98b9-45ad4a515cc0"
+    }
+}
