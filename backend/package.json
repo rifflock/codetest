@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
     "cache-loader": "^2.0.1",
+    "create-react-app": "^2.1.8",
     "eslint": "^5.15.2",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsdoc": "^4.4.2",
