@@ -28,6 +28,15 @@ export const config = {
 		/** Where the contents of the `public` folder are hosted (might be the same as `config.app.DIST_URL`) */
 		PUBLIC_URL: isLocal ? 'http://localhost:8080' : process.env.APP_PUBLIC_URL,
 	},
+	aws: {
+		KEY: "",
+		SECRET: "",
+		REGION: "us-east-1",
+		SERVICE: "apigateway",
+		HOST: "https://api.michaelriffle.com",
+		REJECT_UNAUTH: !isLocal,
+		USE_CORS: !isLocal,
+	}
 };
 
 export default config;

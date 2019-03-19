@@ -23,16 +23,17 @@ class App extends Component {
 					{ config => (
 						<div className="App">
 							<header className="App-header">
-								<img src={logo} className="App-logo" alt="logo" />
-								<h1 className="App-title">Welcome to {config.app.TITLE}</h1>
+								<h1 className="App-title">Welcome to {config.app.TITLE} Factoid Page</h1>
 							</header>
 							<p className="App-intro">
-								To get started, edit <code>src/App.js</code> and save to reload.
+								Check out these factoids about {config.app.TITLE}
 							</p>
+							<div>
+								<FactoidView updateItemsList={(items) => this.onPageLoad(items)} awsConfig={config.aws}/>
+							</div>
 						</div>
 					)}
 				</ConfigConsumer>
-				<FactoidView updateItemsList={(items) => this.onPageLoad(items)}/>
 			</div>
 		);
 	}

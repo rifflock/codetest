@@ -25,6 +25,7 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "aws4": "^1.8.0",
     "bluebird": "^3.5.3",
     "fs": "0.0.1-security",
     "isomorphic-fetch": "^2.2.1",
