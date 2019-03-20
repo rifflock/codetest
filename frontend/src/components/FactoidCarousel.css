@@ -1,0 +1,11 @@
+div.inline-button {
+    float:left;
+    width:100px;
+}
+div.inline-fact {
+    float:left;
+    width:400px
+}
+div.factoid-carousel {
+    width:600px;
+}

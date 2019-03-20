@@ -3,10 +3,17 @@ import bb from "bluebird";
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { ConfigConsumer } from '../components/ConfigProvider';
-import './App.css';
 import FactoidView from "../components/FactoidView";
+import './App.css';
 
 class App extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			factoids: []
+		};
+	}
 
 	onPageLoad(factoids) {
 		this.setState({
@@ -28,9 +35,10 @@ class App extends Component {
 							<p className="App-intro">
 								Check out these factoids about {config.app.TITLE}
 							</p>
-							<div>
-								<FactoidView updateItemsList={(items) => this.onPageLoad(items)} awsConfig={config.aws}/>
-							</div>
+							<FactoidView
+								updateItemsList={(items) => this.onPageLoad(items)}
+								awsConfig={config.aws}
+								factoids={this.state.factoids}/>
 						</div>
 					)}
 				</ConfigConsumer>
