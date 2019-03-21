@@ -29,13 +29,9 @@ export const config = {
 		PUBLIC_URL: isLocal ? 'http://localhost:8080' : process.env.APP_PUBLIC_URL,
 	},
 	aws: {
-		KEY: "",
-		SECRET: "",
 		REGION: "us-east-1",
-		SERVICE: "apigateway",
-		HOST: "https://api.michaelriffle.com",
-		REJECT_UNAUTH: !isLocal,
-		USE_CORS: !isLocal,
+		SERVICE: "execute-api",
+		HOST: "api.michaelriffle.com",
 	}
 };
 

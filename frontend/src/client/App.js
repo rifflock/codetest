@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import { ConfigConsumer } from '../components/ConfigProvider';
 import FactoidView from "../components/FactoidView";
+import AddFactoid from "../components/AddFactoid";
 import './App.css';
 
 class App extends Component {
@@ -22,27 +23,35 @@ class App extends Component {
 		});
 	}
 
+	getFacts() {
+		return this.state.factoids;
+	}
+
 	render() {
 		console.log("Rendering App");
 		return (
-			<div>
-				<ConfigConsumer>
-					{ config => (
-						<div className="App">
-							<header className="App-header">
-								<h1 className="App-title">Welcome to {config.app.TITLE} Factoid Page</h1>
-							</header>
-							<p className="App-intro">
-								Check out these factoids about {config.app.TITLE}
-							</p>
+			<ConfigConsumer>
+				{ config => (
+					<div className="App">
+						<h1 className="App-title">Welcome to {config.app.TITLE} Factoid Page</h1>
+						<p className="App-intro">
+							Check out these factoids about {config.app.TITLE}
+						</p>
+						<div>
 							<FactoidView
 								updateItemsList={(items) => this.onPageLoad(items)}
 								awsConfig={config.aws}
-								factoids={this.state.factoids}/>
+								getFacts={() => this.getFacts()}/>
 						</div>
-					)}
-				</ConfigConsumer>
-			</div>
+						<div>
+							<AddFactoid
+								updateItemsList={(items) => this.onPageLoad(items)}
+								awsConfig={config.aws}
+								getFacts={() => this.getFacts()} />
+						</div>
+					</div>
+				)}
+			</ConfigConsumer>
 		);
 	}
 }

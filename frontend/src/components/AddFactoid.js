@@ -1,16 +1,20 @@
 import _ from "lodash";
+import aws4 from "aws4";
 import React, { Component } from "react";
 import Modal from "react-modal";
 import { Button, Form } from "react-bootstrap";
+import { ApiWrapper } from "../server/ApiWrapper";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./AddFactoid.css";
 
-export class AddFactoid extends Component {
+export default class AddFactoid extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			show: false,
 		};
+		this.api = new ApiWrapper(this.props.awsConfig);
 	}
 
 	handleClose() {
@@ -19,13 +23,22 @@ export class AddFactoid extends Component {
 		});
 	}
 
+
 	handleSubmit(evt) {
-		this.props.onSubmit({
+		return this.api.addFact({
 			title: this.state.title,
 			body: this.state.body,
-		});
-		this.setState({
-			show: false
+		})
+		.then(items => {
+			this.setState({
+				show: false,
+				title: null,
+				body: null,
+			});
+			return items;
+		})
+		.then(items => {
+			this.props.updateItemsList(items);
 		})
 	}
 
@@ -42,9 +55,8 @@ export class AddFactoid extends Component {
 	}
 
 	render() {
-		console.log("RENDERING ADD FACTOID");
 		return (
-			<div>
+			<div className="add-fact-button">
 			<Button type="button" active="true" variant="primary" onClick={() => this.handleShow()}>Add Fact</Button>
 			<Modal isOpen={this.state.show} onHide={() => this.handleClose()}>
 				<div>Add a Viserra Factoid</div>
@@ -60,8 +72,8 @@ export class AddFactoid extends Component {
 					</Form.Group>
 				</Form>
 				<footer>
-					<button variant="secondary" onClick={() => this.handleClose()}>Close</button>
-					<button variant="primary" type="submit" onClick={(evt) => this.handleSubmit(evt)}>Save Changes</button>
+					<Button variant="secondary" onClick={() => this.handleClose()}>Close</Button>
+					<Button variant="primary" type="submit" onClick={(evt) => this.handleSubmit(evt)}>Save Changes</Button>
 				</footer>
 			</Modal>
 			</div>

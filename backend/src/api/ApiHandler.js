@@ -11,7 +11,8 @@ export class ApiHandler {
 		return [
 			"localhost",
 			"127.0.0.1",
-			"*.michaelriffle.com",
+			"code.michaelriffle.com",
+			"api.michaelriffle.com",
 		];
 	}
 

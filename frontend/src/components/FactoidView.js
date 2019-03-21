@@ -3,9 +3,9 @@ import _ from "lodash";
 import aws4 from "aws4";
 import BbPromise from "bluebird";
 import React, { Component } from "react";
-import fetch from "isomorphic-fetch";
 import { FactoidCarousel } from "./FactoidCarousel";
 import { AddFactoid } from "../components/AddFactoid";
+import { ApiWrapper } from "../server/ApiWrapper";
 import "../client/App.css";
 
 export default class FactoidView extends Component {
@@ -16,98 +16,41 @@ export default class FactoidView extends Component {
 		this.state = {
 			currentIndex: 0
 		};
+		this.api = new ApiWrapper(this.props.awsConfig);
 	}
 
 	onNavigateClick(moveRight) {
 		const newIndex = moveRight ? this.state.currentIndex + 1 : this.state.currentIndex - 1;
+		const mod = newIndex % _.size(this.props.getFacts());
+		const currentIndex = mod >= 0 ? mod : mod + _.size(this.props.getFacts())
 		this.setState({
-			currentIndex: newIndex % _.size(this.props.factoids),
-		});
-	}
-
-	getList() {
-		const path = "/api/api/factoids/viserra";
-		const opts = {
-			host: this.props.awsConfig.HOST,
-			path,
-			uri: `https://${this.props.awsConfig.HOST}${path}`,
-			json: true,
-			region: this.props.awsConfig.REGION,
-			service: this.props.awsConfig.SERVICE,
-		};
-
-		aws4.sign(opts, {
-			accessKeyId: this.props.awsConfig.KEY,
-			secretAccessKey: this.props.awsConfig.SECRET,
-		});
-		console.log(opts);
-		return fetch(opts.uri, {
-			headers: opts.headers
-		})
-		.then(response => response.json())
-		.then(data => {
-			const validFacts = _.filter(_.get(data, "items", []), factoid => _.has(factoid, "title") || _.has(factoid, "body"));
-			this.props.updateItemsList(validFacts);
-		});
-	}
-
-	addNewFact(newFact) {
-		const method = "POST";
-		const path = "/api/api/factoids/viserra";
-		const opts = {
-			host: this.props.awsConfig.HOST,
-			body: JSON.stringify(newFact),
-			method,
-			path,
-			uri: `https://${this.props.awsConfig.HOST}${path}`,
-			json: true,
-			region: this.props.awsConfig.REGION,
-			service: this.props.awsConfig.SERVICE,
-		};
-
-		aws4.sign(opts, {
-			accessKeyId: this.props.awsConfig.KEY,
-			secretAccessKey: this.props.awsConfig.SECRET,
-		});
-		console.log(opts);
-		return fetch(opts.uri, {
-			headers: opts.headers,
-			method
-		})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			return this.getList();
+			currentIndex
 		});
 	}
 
 	componentWillMount() {
-		if (!_.isEmpty(this.props.items) && _.now < this.props.lastFetch + 15*60*1000) {
+		if (!_.isEmpty(this.props.getFacts()) && _.now < this.props.lastFetch + 15*60*1000) {
 			return;
 		}
-		return this.getList();
+		return this.api.getList()
+		.then(facts => this.props.updateItemsList(facts));
 	}
 
 	render() {
-		console.log("Rendering Factoid View");
-		const validFacts = this.props.factoids;
+		const validFacts = this.props.getFacts();
 		return (
-			<div>
-				<div display="block" width="100%">
-				{
-					_.isEmpty(validFacts) ?
-					<p>
-						No Factoids have been entered yet. Create one below.
-					</p>
-					:
-					<FactoidCarousel
-						index={this.state.currentIndex}
-						onNavigateClick={(moveRight) => this.onNavigateClick(moveRight)}
-						facts={validFacts} />
-				}
-				</div>
-				<AddFactoid
-					onSubmit={(evt) => this.addNewFact(evt)} />
+			<div className="factoid-view">
+			{
+				_.isEmpty(validFacts) ?
+				<p>
+					No Factoids have been entered yet. Create one below.
+				</p>
+				:
+				<FactoidCarousel
+					index={this.state.currentIndex}
+					onNavigateClick={(moveRight) => this.onNavigateClick(moveRight)}
+					facts={validFacts} />
+			}
 			</div>
 		);
 	}
