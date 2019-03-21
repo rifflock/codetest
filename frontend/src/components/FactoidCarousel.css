@@ -4,8 +4,12 @@ div.inline-button {
 }
 div.inline-fact {
     float:left;
-    width:400px
+    width:600px
 }
 div.factoid-carousel {
-    width:600px;
+    width:800px;
+}
+img.factoid-image {
+    width: 500px;
+    height: auto;
 }

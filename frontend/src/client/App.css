@@ -23,6 +23,5 @@
 }
 
 div.factoid-view {
-  margin-left: 25%;
-  display: block;
+  display: inline-block;
 }

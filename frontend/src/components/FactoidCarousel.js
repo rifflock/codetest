@@ -12,6 +12,7 @@ export class FactoidCarousel extends Component {
 						PREV
 					</Button></div>
 				<div className="inline-fact">
+					<p><img src={currentFact.imageUrl} className="factoid-image" /></p>
 					<p><b>{ currentFact.title }</b></p>
 					<p>{ currentFact.body }</p>
 				</div>

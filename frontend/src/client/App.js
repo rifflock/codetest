@@ -43,12 +43,12 @@ class App extends Component {
 								awsConfig={config.aws}
 								getFacts={() => this.getFacts()}/>
 						</div>
-						<div>
+						<footer>
 							<AddFactoid
 								updateItemsList={(items) => this.onPageLoad(items)}
 								awsConfig={config.aws}
 								getFacts={() => this.getFacts()} />
-						</div>
+						</footer>
 					</div>
 				)}
 			</ConfigConsumer>
